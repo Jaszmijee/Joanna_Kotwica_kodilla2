@@ -24,4 +24,8 @@ RUN chmod +x gradlew
 RUN echo ${MYSQL_DB_URL}
 RUN ./gradlew build -PMYSQL_DB_URL="${MYSQL_DB_URL}" -PTRELLO_KEY=${TRELLO_KEY} -PTRELLO_TOKEN=${TRELLO_TOKEN} -PTRELLO_NAME=${TRELLO_NAME}
 
+RUN ls /usr/src/app
+RUN ls /usr/src/app/build
+RUN ls /usr/src/app/build/libs
+
 ENTRYPOINT ["java","-jar","/usr/src/app/build/libs/tasks-0.0.1-SNAPSHOT.jar"]
