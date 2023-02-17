@@ -9,6 +9,10 @@ ARG TRELLO_TOKEN
 ENV TRELLO_TOKEN ${TRELLO_TOKEN?notset}
 ARG TRELLO_NAME
 ENV TRELLO_NAME ${TRELLO_NAME?notset}
+ARG MAIL_USERNAME
+ENV MAIL_USERNAME ${MAIL_USERNAME?notset}
+ARG MAIL_PASSWORD
+ENV MAIL_PASSWORD ${MAIL_PASSWORD?notset}
 WORKDIR /usr/src/app
 
 COPY . .
@@ -22,7 +26,7 @@ EXPOSE 8080
 RUN cat  /usr/src/app/src/main/resources/application-mogenius.properties >  /usr/src/app/src/main/resources/application.properties
 RUN chmod +x gradlew
 RUN echo ${MYSQL_DB_URL}
-RUN ./gradlew build -PMYSQL_DB_URL="${MYSQL_DB_URL}" -PTRELLO_KEY=${TRELLO_KEY} -PTRELLO_TOKEN=${TRELLO_TOKEN} -PTRELLO_NAME=${TRELLO_NAME}
+RUN ./gradlew build -PMYSQL_DB_URL="${MYSQL_DB_URL}" -PTRELLO_KEY=${TRELLO_KEY} -PTRELLO_TOKEN=${TRELLO_TOKEN} -PTRELLO_NAME=${TRELLO_NAME} -PMAIL_USERNAME=${MAIL_USERNAME} -PMAIL_PASSWORD=${MAIL_PASSWORD}
 
 RUN ls /usr/src/app
 RUN ls /usr/src/app/build
