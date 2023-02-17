@@ -127,8 +127,7 @@ class TaskControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/tasks")
-                        .param("taskId", "4")
+                        .delete("/v1/tasks/4")
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
@@ -146,8 +145,7 @@ class TaskControllerTest {
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
-                        .delete("/v1/tasks")
-                        .param("taskId", "2")
+                        .delete("/v1/tasks/2")
                         .contentType(MediaType.APPLICATION_JSON))
 
                 .andExpect(MockMvcResultMatchers.status().isOk());
