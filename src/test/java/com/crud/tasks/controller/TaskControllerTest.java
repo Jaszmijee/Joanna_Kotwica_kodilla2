@@ -6,6 +6,7 @@ import com.crud.tasks.service.DbService;
 import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -121,9 +122,8 @@ class TaskControllerTest {
     @Test
     void deleteTaskDoesNotExist() throws Exception {
         // Given
-        doCallRealMethod().when(service).deleteTask(4L);
-        when(service.getTask(4L)).thenThrow(TaskNotFoundException.class);
 
+        Mockito.doThrow(TaskNotFoundException.class).when(service).deleteTask(4L);
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders

@@ -18,12 +18,14 @@ public class EmailScheduler {
     private static final String SUBJECT = "Tasks: Once a day email";
 
 
+
+
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
         long size = taskRepository.count();
         StringBuilder builder = new StringBuilder("Currently in database you got: " + size);
         String message = ((size == 1) ? builder.append(" task") : builder.append(" tasks")).toString();
-        simpleEmailService.send(
+        simpleEmailService.sendScheduled(
                 Mail.builder()
                         .mailTo(adminConfig.getAdminMail())
                         .subject(SUBJECT)
